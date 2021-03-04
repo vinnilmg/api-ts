@@ -1,0 +1,5 @@
+Iniciar Proj
+npm init -y
+
+Pacotes
+npm i typescript ts-node body-parser express http-status --save

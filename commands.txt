@@ -1,5 +1,9 @@
 Iniciar Proj
-npm init -y
+yarn init -y
 
 Pacotes
-npm i typescript ts-node body-parser express http-status --save
+yarn add typescript ts-node body-parser express http-status
+yarn add ts-node-dev -D
+
+@types
+yarn add @types/node @types/body-parser @types/express @types/http-status -D

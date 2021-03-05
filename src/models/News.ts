@@ -1,0 +1,8 @@
+
+
+class News {
+
+
+}
+
+export { News };

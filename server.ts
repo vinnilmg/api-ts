@@ -1,4 +1,5 @@
-import { app } from "./routes";
+import { app } from "./src/routes";
+
 
 const port = process.env.PORT || '3050';
 

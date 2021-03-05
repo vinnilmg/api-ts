@@ -4,6 +4,12 @@ yarn init -y
 Pacotes
 yarn add typescript ts-node body-parser express http-status
 yarn add ts-node-dev -D
+yarn add mongoose
 
 @types
 yarn add @types/node @types/body-parser @types/express @types/http-status -D
+yarn add @types/mongoose -D
+
+DOCKER
+docker ps 
+docker stop {ID_CONTAINER}

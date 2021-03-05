@@ -1,14 +1,10 @@
 import { Router } from "express";
-import { TestController } from "./controllers/TestController";
-import * as express from 'express';
+import { NewsController } from "./controllers/NewsController";
 
-const app = express();
 const router = Router();
 
-const testController = new TestController();
+const newsController = new NewsController();
 
-router.get('/', testController.execute)
+router.get('/news', newsController.get)
 
-app.use(router);
-
-export { app };
+export { router };

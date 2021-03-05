@@ -1,0 +1,64 @@
+
+import { Request, Response } from 'express';
+import NewsService  from '../services/NewsService';
+import  * as HttpStatus from 'http-status';
+import Helper from '../infra/helper';
+
+
+class NewsController {
+
+    async get(request: Request, response: Response) {
+        try {
+            const news = await NewsService.get();
+            Helper.sendResponse(response, HttpStatus.OK, news);
+        } catch(err) {
+            console.log(err);
+        }
+    };
+
+    async getById(request: Request, response: Response) {
+        const { id } = request.params;
+
+        try {
+            const news = await NewsService.getById(id);
+            Helper.sendResponse(response, HttpStatus.OK, news);
+        } catch(err) {
+            console.log(err);
+        }      
+    };
+
+    async create(request: Request, response: Response) {
+        const news = request.body;
+
+        try {
+            await NewsService.create(news);
+            Helper.sendResponse(response, HttpStatus.CREATED, 'Criado com sucesso!');
+        } catch(err){
+            console.log(err);
+        }
+    };
+
+    async update(request: Request, response: Response) {
+        const { id } = request.params;
+        const news = request.body;
+
+        try {
+            await NewsService.update(id, news); 
+            Helper.sendResponse(response, HttpStatus.OK, `${news.title} atualizado com sucesso!`);
+        } catch(err) {
+            console.log(err);
+        }
+    };
+
+    async delete(request: Request, response: Response) {
+        const { id } = request.params;
+
+        try {
+            await NewsService.delete(id);
+            Helper.sendResponse(response, HttpStatus.OK, 'Noticia deletada com sucesso!');
+        } catch(err) { console.log(err) }
+    };
+
+}
+
+export { NewsController };

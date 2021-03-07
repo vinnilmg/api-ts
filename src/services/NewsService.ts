@@ -6,8 +6,8 @@ class NewsService {
         return await NewsRepository.find({});
     };
 
-    async getById(id){
-        return await NewsRepository.findById(id);
+    async getById(_id){
+        return await NewsRepository.findById(_id);
 
     };
 
@@ -15,12 +15,12 @@ class NewsService {
         return await NewsRepository.create(news);
     };
 
-    async update(id, news) {
-        return await NewsRepository.findByIdAndUpdate(id, news);
+    async update(_id, news) {
+        return await NewsRepository.findByIdAndUpdate(_id, news);
     };
 
-    async delete(id) {
-        return await NewsRepository.findByIdAndRemove(id);
+    async delete(_id) {
+        return await NewsRepository.findByIdAndRemove(_id);
     };
   
 }

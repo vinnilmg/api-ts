@@ -12,18 +12,18 @@ class NewsController {
             const news = await NewsService.get();
             Helper.sendResponse(response, HttpStatus.OK, news);
         } catch(err) {
-            console.log(err);
+            Helper.sendResponse(response, 400, err);
         }
     };
 
     async getById(request: Request, response: Response) {
-        const { id } = request.params;
-
+        const { _id } = request.params;
+        //console.log(_id);
         try {
-            const news = await NewsService.getById(id);
+            const news = await NewsService.getById(_id);
             Helper.sendResponse(response, HttpStatus.OK, news);
         } catch(err) {
-            console.log(err);
+            Helper.sendResponse(response, 400, err);
         }      
     };
 
@@ -34,7 +34,7 @@ class NewsController {
             await NewsService.create(news);
             Helper.sendResponse(response, HttpStatus.CREATED, 'Criado com sucesso!');
         } catch(err){
-            console.log(err);
+            Helper.sendResponse(response, 400, err);
         }
     };
 
@@ -46,7 +46,7 @@ class NewsController {
             await NewsService.update(id, news); 
             Helper.sendResponse(response, HttpStatus.OK, `${news.title} atualizado com sucesso!`);
         } catch(err) {
-            console.log(err);
+            Helper.sendResponse(response, 400, err);
         }
     };
 
@@ -56,7 +56,7 @@ class NewsController {
         try {
             await NewsService.delete(id);
             Helper.sendResponse(response, HttpStatus.OK, 'Noticia deletada com sucesso!');
-        } catch(err) { console.log(err) }
+        } catch(err) { Helper.sendResponse(response, 400, err) }
     };
 
 }

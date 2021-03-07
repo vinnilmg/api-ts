@@ -13,3 +13,6 @@ yarn add @types/mongoose -D
 DOCKER
 docker ps 
 docker stop {ID_CONTAINER}
+
+REMOVE
+yarn remove mongoose

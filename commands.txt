@@ -22,3 +22,7 @@ REMOVER IMAG => docker rmi {NME_IMG} {-f}
 
 REMOVE
 yarn remove mongoose
+
+CORS
+yarn add cors
+yarn add @types/cors -D

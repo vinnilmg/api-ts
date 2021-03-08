@@ -11,8 +11,14 @@ yarn add @types/node @types/body-parser @types/express @types/http-status -D
 yarn add @types/mongoose -D
 
 DOCKER
-docker ps 
-docker stop {ID_CONTAINER}
+VERIF. IMGS RODANDO => docker ps 
+PARAR CONTAINER => docker stop {ID_CONTAINER}
+CRIA IMAGEM => docker build -t buibui10/api-ts .
+EXEC IMG = > docker run -d -p 5000:3050 buibui10/api-ts  || docker run buibui10/api-ts
+EXEC DOCKER COMPOSE => docker-compose up
+LOGAR DOCKER => docker login
+PUB IMG => docker push buibui10/api-ts
+REMOVER IMAG => docker rmi {NME_IMG} {-f}
 
 REMOVE
 yarn remove mongoose

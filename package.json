@@ -6,7 +6,8 @@
   "author": "vinnilmg <vini.delimagomes@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --transpile-only --ignore-watch node-modules server.ts"
+    "startDck": "ts-node-dev --transpile-only --ignore-watch node-modules server.ts",
+    "start": "ts-node-dev --transpile-only --ignore-watch node-modules src/server.ts"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

@@ -26,3 +26,9 @@ yarn remove mongoose
 CORS
 yarn add cors
 yarn add @types/cors -D
+
+JWT
+yarn add jsonwebtoken
+yarn add @types/jsonwebtoken -D
+
+UPLOAD DE IMAGENS

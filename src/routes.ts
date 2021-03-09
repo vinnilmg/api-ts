@@ -1,6 +1,7 @@
 import { Router } from "express";
 import * as cors from 'cors';
 import { NewsController } from "./controllers/NewsController";
+import Auth from './infra/auth';
 
 const router = Router();
 
@@ -23,7 +24,8 @@ const options: cors.CorsOptions = {
     preflightContinue: false,
   };
 
-  router.use(cors(options));
+router.use(cors(options)); // CORS
+router.use(Auth.validate); // JWT
 
 router.get('/', newsController.tstApi);
 router.get(`${uriPadrao}`, newsController.get);

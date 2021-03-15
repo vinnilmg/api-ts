@@ -10,4 +10,4 @@ COPY ./dist .
 
 EXPOSE 3050
 
-CMD ["yarn", "startDck"]
+CMD ["yarn", "startdocker"]

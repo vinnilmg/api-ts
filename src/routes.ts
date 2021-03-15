@@ -27,12 +27,14 @@ const options: cors.CorsOptions = {
 
 router.use(cors(options)); // CORS
 
-router.get('/', newsController.tstApi);
+router.get('/', (request, response) => {
+  return response.status(200).json({"versao": "0.0.1"});
+});
 
 //uploads
 router.post('/uploads', uploads.single('file'), (request, response) => {
   try{
-    response.send({msg: "arquivo enviado com sucesso"});
+    return response.status(200).json({msg: "arquivo enviado com sucesso"});
   } catch(err) {
     console.log(err);
   }

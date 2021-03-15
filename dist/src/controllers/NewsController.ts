@@ -1,22 +1,35 @@
 
 import { Request, Response } from 'express';
-import NewsService  from '../services/NewsService';
-import  * as HttpStatus from 'http-status';
+import NewsService from '../services/NewsService';
+import * as HttpStatus from 'http-status';
 import Helper from '../infra/helper';
-
+import * as redis from 'redis';
 
 class NewsController {
 
-    async tstApi(request: Request, response: Response) {
-        return response.status(200).json({"versao": "0.0.1"});
-    };
-
     async get(request: Request, response: Response) {
+
         try {
-            const news = await NewsService.get();
-            Helper.sendResponse(response, HttpStatus.OK, news);
-        } catch(err) {
-            Helper.sendResponse(response, 400, err);
+            let client = redis.createClient(6379, 'redis');
+
+            await client.get('news', async function (err, reply) {
+                //console.log(reply.length)
+                if (reply && reply.length > 0) {
+                    console.log('redis');
+                    Helper.sendResponse(response, HttpStatus.OK, JSON.parse(reply)); //se já tem, só devolve
+
+                } else {
+                    let news = await NewsService.get();
+                    console.log('db');
+                    client.set('news', JSON.stringify(news)); //cadastra no redis
+                    client.expire('news', 10); // atualiza dados a cada tantos segundos
+                    Helper.sendResponse(response, HttpStatus.OK, news);
+                }
+            })
+
+        } catch (err) {
+            console.error(err);
+            Helper.sendResponse(response, HttpStatus.ERROR, {msg: err});
         }
     };
 
@@ -26,9 +39,9 @@ class NewsController {
         try {
             const news = await NewsService.getById(_id);
             Helper.sendResponse(response, HttpStatus.OK, news);
-        } catch(err) {
+        } catch (err) {
             Helper.sendResponse(response, 400, err);
-        }      
+        }
     };
 
     async create(request: Request, response: Response) {
@@ -37,7 +50,7 @@ class NewsController {
         try {
             await NewsService.create(news);
             Helper.sendResponse(response, HttpStatus.CREATED, 'Criado com sucesso!');
-        } catch(err){
+        } catch (err) {
             Helper.sendResponse(response, 400, err);
         }
     };
@@ -47,9 +60,9 @@ class NewsController {
         const news = request.body;
 
         try {
-            await NewsService.update(id, news); 
+            await NewsService.update(id, news);
             Helper.sendResponse(response, HttpStatus.OK, `${news.title} atualizado com sucesso!`);
-        } catch(err) {
+        } catch (err) {
             Helper.sendResponse(response, 400, err);
         }
     };
@@ -60,7 +73,7 @@ class NewsController {
         try {
             await NewsService.delete(id);
             Helper.sendResponse(response, HttpStatus.OK, 'Noticia deletada com sucesso!');
-        } catch(err) { Helper.sendResponse(response, 400, err) }
+        } catch (err) { Helper.sendResponse(response, 400, err) }
     };
 
 }

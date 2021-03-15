@@ -2,7 +2,6 @@ import * as express from 'express';
 import { Database } from './infra/database';
 import { router } from './routes';
 
-
 class StartUp {
     public app: express.Application;
     private db: Database;

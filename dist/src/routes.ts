@@ -1,5 +1,8 @@
 import { Router } from "express";
+import * as cors from 'cors';
 import { NewsController } from "./controllers/NewsController";
+import Auth from './infra/auth';
+import { uploads } from './infra/uploads';
 
 const router = Router();
 
@@ -8,7 +11,38 @@ const newsController = new NewsController();
 const  uriPadrao = '/api/v1/news';
 //console.log(`${uriPadrao}`);
 
-router.get('/', newsController.tstApi);
+const options: cors.CorsOptions = {
+    allowedHeaders: [
+      'Origin',
+      'X-Requested-With',
+      'Content-Type',
+      'Accept',
+      'X-Access-Token',
+    ],
+    credentials: true,
+    methods: 'GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE',
+    origin: '*',
+    preflightContinue: false,
+  };
+
+router.use(cors(options)); // CORS
+
+router.get('/', (request, response) => {
+  return response.status(200).json({"versao": "0.0.1"});
+});
+
+//uploads
+router.post('/uploads', uploads.single('file'), (request, response) => {
+  try{
+    return response.status(200).json({msg: "arquivo enviado com sucesso"});
+  } catch(err) {
+    console.log(err);
+  }
+});
+
+// REALIZA O BLOQUEIO DAS ROTAS
+router.use(Auth.validate); // JWT
+
 router.get(`${uriPadrao}`, newsController.get);
 router.get(`${uriPadrao}/:_id`, newsController.getById);
 router.post(`${uriPadrao}/`, newsController.create);

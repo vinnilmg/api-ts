@@ -34,3 +34,21 @@ yarn add @types/jsonwebtoken -D
 UPLOAD DE IMAGENS
 yarn add multer
 yarn add @types/multer -D
+
+ASYNC
+yarn add request
+yarn add @types/request -D
+
+REDIS
+BAIXAR IMAGEM DO REDIS => docker pull redis
+CRIAR CONTAINER => 
+docker run --name redis13 -p 6379:6379 -d redis redis-server --appendonly no
+docker run --name redis-portalnews -d -p 6379:6379 redis
+
+DEPEND
+yarn add redis
+yarn add @types/redis -D
+
+Comandos:
+Acessar client => docker exec -it {ID_CONTAINER} redis-cli
+Retornar valor => get 'key'

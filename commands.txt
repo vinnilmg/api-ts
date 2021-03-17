@@ -23,6 +23,8 @@ REMOVER IMAG => docker rmi {NME_IMG} {-f}
 REMOVE
 yarn remove mongoose
 
+subir mongodb sem password->docker run -d -p 27017:27017 -p 28017:28017 -e AUTH=no tutum/mongodb
+ 
 CORS
 yarn add cors
 yarn add @types/cors -D
@@ -43,7 +45,7 @@ REDIS
 BAIXAR IMAGEM DO REDIS => docker pull redis
 CRIAR CONTAINER => 
 docker run --name redis13 -p 6379:6379 -d redis redis-server --appendonly no
-docker run --name redis-portalnews -d -p 6379:6379 redis
+docker run --name redis-portalnews2 -d -p 6379:6379 redis
 
 DEPEND
 yarn add redis

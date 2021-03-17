@@ -10,7 +10,7 @@ class NewsController {
     async get(request: Request, response: Response) {
 
         try {
-            let client = redis.createClient(6379, 'redis');
+            let client = redis.createClient(); //6379, 'redis'
 
             await client.get('news', async function (err, reply) {
                 //console.log(reply.length)

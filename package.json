@@ -6,7 +6,7 @@
   "author": "vinnilmg <vini.delimagomes@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --transpile-only --ignore-watch node-modules server.ts",
+    "start": "ts-node-dev --transpile-only --ignore-watch node-modules src/server.ts",
     "startdocker": "ts-node-dev --transpile-only --ignore-watch node-modules server.ts",
     "compile": "tsc -w"
   },

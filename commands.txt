@@ -54,3 +54,13 @@ yarn add @types/redis -D
 Comandos:
 Acessar client => docker exec -it {ID_CONTAINER} redis-cli
 Retornar valor => get 'key'
+
+COMPRESSAO DE DADOS
+yarn add compression
+yarn add @types/compression -D
+
+NODEMON
+yarn add nodemon -D
+
+HARD RELOAD CHROME
+CTRL + F5

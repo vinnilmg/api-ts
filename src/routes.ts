@@ -1,5 +1,6 @@
 import { Router } from "express";
 import * as cors from 'cors';
+import * as compression from 'compression';
 import Auth from './infra/auth';
 import { uploads } from './infra/uploads';
 import newsRouter from './router/newsRouter';
@@ -21,6 +22,7 @@ const options: cors.CorsOptions = {
   };
 
 router.use(cors(options)); // CORS
+router.use(compression()); // COMPRESSAO DOS DADOS
 
 router.get('/', (request, response) => {
   return response.status(200).json({"versao": "0.0.1"});
@@ -39,7 +41,7 @@ const  uriPadrao = '/api/v1/news';
 //console.log(`${uriPadrao}`);
 
 // REALIZA O BLOQUEIO DAS ROTAS
-router.use(Auth.validate); // JWT
+//router.use(Auth.validate); // JWT
 router.use(`${uriPadrao}`, newsRouter);
 
 export { router };

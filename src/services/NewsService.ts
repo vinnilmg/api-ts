@@ -2,8 +2,17 @@ import NewsRepository from '../repository/NewsRepository';
 
 class NewsService {
 
+    async search( term, page, limit ) {
+        console.log(page.type, limit.type);
+        return await NewsRepository.find(
+            { title: new RegExp('.*' + term + '*.', 'i' ) , active: true }, 
+            'title hat active publishDate'
+        ).sort({publishDate: -1 }).skip((page -1 * limit)).limit(10);
+    }
+
     async get(){
-        return await NewsRepository.find({});
+        //filtros, propriedades para retorno
+        return await NewsRepository.find({ active: true, hat : 'teste' }, 'title hat img publishDate'); 
     };
 
     async getById(_id){

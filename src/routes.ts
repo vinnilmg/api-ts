@@ -37,7 +37,7 @@ router.post('/uploads', uploads.single('file'), (request, response) => {
   }
 });
 
-const  uriPadrao = '/api/v1/news';
+const  uriPadrao = '/api/v1';
 //console.log(`${uriPadrao}`);
 
 // REALIZA O BLOQUEIO DAS ROTAS

@@ -22,7 +22,7 @@ class NewsController {
                     let news = await NewsService.get();
                     console.log('db');
                     client.set('news', JSON.stringify(news)); //cadastra no redis
-                    client.expire('news', 10); // atualiza dados a cada tantos segundos
+                    client.expire('news', 5); // atualiza dados a cada tantos segundos
                     Helper.sendResponse(response, HttpStatus.OK, news);
                 }
             })
@@ -38,6 +38,22 @@ class NewsController {
         //console.log(_id);
         try {
             let news = await NewsService.getById(_id);
+            Helper.sendResponse(response, HttpStatus.OK, news);
+        } catch (err) {
+            Helper.sendResponse(response, 400, err);
+        }
+    };
+
+    async search(request: Request, response: Response) {
+        const { term } = request.params;
+        
+        const page = (request.param('page')) ? parseInt(request.param('page')) : 1;
+        const perPage = (request.param('limit')) ? parseInt(request.param('limit')) : 1;
+        console.log(page, perPage);
+        
+
+        try {
+            let news = await NewsService.search(term, page, perPage);
             Helper.sendResponse(response, HttpStatus.OK, news);
         } catch (err) {
             Helper.sendResponse(response, 400, err);

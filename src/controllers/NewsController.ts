@@ -49,12 +49,11 @@ class NewsController {
         const { term } = request.params;
         
         const page = (request.param('page')) ? parseInt(request.param('page')) : 1;
-        const perPage = (request.param('limit')) ? parseInt(request.param('limit')) : 1;
-        console.log(page, perPage);
+        const limit = (request.param('limit')) ? parseInt(request.param('limit')) : 10;
+        //console.log(page, limit);
         
-
         try {
-            let news = await NewsService.search(term, page, perPage);
+            let news = await NewsService.search(term, page, limit);
             Helper.sendResponse(response, HttpStatus.OK, news);
         } catch (err) {
             Helper.sendResponse(response, 400, err);

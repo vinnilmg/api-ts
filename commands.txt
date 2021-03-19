@@ -65,7 +65,7 @@ yarn add nodemon -D
 HARD RELOAD CHROME
 CTRL + F5
 
-CSV
+EXPORTAR EM CSV
 yarn add uuid
 yarn add json2csv
 yarn add @types/uuid @types/json2csv -D

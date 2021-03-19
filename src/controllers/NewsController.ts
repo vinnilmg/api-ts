@@ -4,6 +4,7 @@ import NewsService from '../services/NewsService';
 import * as HttpStatus from 'http-status';
 import Helper from '../infra/helper';
 import * as redis from 'redis';
+import ExportFiles from '../infra/exportFiles';
 
 class NewsController {
 
@@ -59,6 +60,18 @@ class NewsController {
             Helper.sendResponse(response, 400, err);
         }
     };
+
+    async exportToCsv(request: Request, response: Response) {
+
+        try{
+            let res = await NewsService.get();
+            let filename = ExportFiles.tocsv(res);
+
+            Helper.sendResponse(response, HttpStatus.OK, request.get('host') + '/src/exports/' + filename);
+
+        } catch(err) {console.error(err)};
+
+    }
 
     async create(request: Request, response: Response) {
         const news = request.body;

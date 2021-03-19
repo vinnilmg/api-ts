@@ -1,11 +1,11 @@
-import { Router } from "express";
+import * as express from "express";
 import * as cors from 'cors';
 import * as compression from 'compression';
 import Auth from './infra/auth';
 import { uploads } from './infra/uploads';
 import newsRouter from './router/newsRouter';
 
-const router = Router();
+const router = express.Router();
 
 const options: cors.CorsOptions = {
     allowedHeaders: [
@@ -23,8 +23,11 @@ const options: cors.CorsOptions = {
 
 router.use(cors(options)); // CORS
 router.use(compression()); // COMPRESSAO DOS DADOS
+router.use('/exports', express.static(process.cwd() + '/exports')) //PERMISSAO PARA DOWNLOAD
+
 
 router.get('/', (request, response) => {
+  console.log(process.cwd());
   return response.status(200).json({"versao": "0.0.1"});
 });
 

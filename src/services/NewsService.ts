@@ -12,7 +12,7 @@ class NewsService {
 
     async get(){
         //filtros, propriedades para retorno
-        return await NewsRepository.find({ active: true, hat : 'teste' }, 'title hat img publishDate'); 
+        return await NewsRepository.find({ active: true, hat : 'publish' }, 'title hat img publishDate'); 
     };
 
     async getById(_id){

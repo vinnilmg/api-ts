@@ -11,7 +11,7 @@ yarn add @types/node @types/body-parser @types/express @types/http-status -D
 yarn add @types/mongoose -D
 
 DOCKER
-VERIF. IMGS RODANDO => docker ps 
+VERIF. IMGS RODANDO => docker ps {-a}
 PARAR CONTAINER => docker stop {ID_CONTAINER}
 CRIA IMAGEM => docker build -t buibui10/api-ts .
 EXEC IMG = > docker run -d -p 5000:3050 buibui10/api-ts  || docker run buibui10/api-ts
@@ -69,3 +69,51 @@ EXPORTAR EM CSV
 yarn add uuid
 yarn add json2csv
 yarn add @types/uuid @types/json2csv -D
+
+GraphQL
+yarn add express-graphql graphql
+yarn add @types/express-graphql @types/graphql -D
+
+GRAPHQL QUERY
+{
+  newsGetById(id: "6055143396439f3d34a882d4") {
+    _id,
+    author,
+    publishDate
+  }
+}
+
+{
+  newsList{
+    _id,
+    hat,
+    title,
+    publishDate
+  }
+}
+
+MUTATION
+mutation($news: NewsInput!){
+  addNews(input: $news){
+    hat,
+    title,
+    author,
+    text,
+    img,
+    publishDate,
+    link
+  }
+}
+
+mutation($news: NewsInput!){
+  updateNews(input: $news){
+   hat,
+   title
+  }
+}
+
+mutation{
+  deleteNews(id: "6055143396439f3d34a882d4"){
+    _id
+  }
+}

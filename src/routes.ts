@@ -1,9 +1,13 @@
 import * as express from "express";
 import * as cors from 'cors';
 import * as compression from 'compression';
+import {graphqlHTTP} from 'express-graphql';
 import Auth from './infra/auth';
 import { uploads } from './infra/uploads';
 import newsRouter from './router/newsRouter';
+import schemas from './graphql/schemas';
+import resolvers from './graphql/resolvers';
+
 
 const router = express.Router();
 
@@ -25,6 +29,12 @@ router.use(cors(options)); // CORS
 router.use(compression()); // COMPRESSAO DOS DADOS
 router.use('/exports', express.static(process.cwd() + '/exports')) //PERMISSAO PARA DOWNLOAD
 
+//GRAPHQL
+router.use('/graphql', graphqlHTTP({
+  schema: schemas,
+  rootValue: resolvers,
+  graphiql: true
+}));
 
 router.get('/', (request, response) => {
   console.log(process.cwd());
@@ -39,6 +49,7 @@ router.post('/uploads', uploads.single('file'), (request, response) => {
     console.log(err);
   }
 });
+
 
 const  uriPadrao = '/api/v1';
 //console.log(`${uriPadrao}`);

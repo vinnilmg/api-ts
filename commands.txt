@@ -16,9 +16,10 @@ PARAR CONTAINER => docker stop {ID_CONTAINER}
 CRIA IMAGEM => docker build -t buibui10/api-ts .
 EXEC IMG = > docker run -d -p 5000:3050 buibui10/api-ts  || docker run buibui10/api-ts
 EXEC DOCKER COMPOSE => docker-compose up
-LOGAR DOCKER => docker login
+LOGAR DOCKER => docker login / docker login -u {user} -p {pass}
 PUB IMG => docker push buibui10/api-ts
 REMOVER IMAG => docker rmi {NME_IMG} {-f}
+INSERIR TAG => docker tag image-id buibui10/apits:tag
 
 REMOVE
 yarn remove mongoose
@@ -117,3 +118,6 @@ mutation{
     _id
   }
 }
+
+AZURE STORAGE
+yarn add multer-azure-blob-storage 

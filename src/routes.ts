@@ -3,7 +3,7 @@ import * as cors from 'cors';
 import * as compression from 'compression';
 import {graphqlHTTP} from 'express-graphql';
 import Auth from './infra/auth';
-import { uploads } from './infra/uploads';
+import uploads  from './infra/uploads';
 import newsRouter from './router/newsRouter';
 import schemas from './graphql/schemas';
 import resolvers from './graphql/resolvers';
